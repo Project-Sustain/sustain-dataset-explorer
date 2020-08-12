@@ -11,7 +11,7 @@
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = (typeof self == "undefined" ? typeof global == "undefined"? this : global : self);
 
 goog.exportSymbol('proto.census.CensusFeature', null, global);
 goog.exportSymbol('proto.census.CensusResolution', null, global);
