@@ -4,12 +4,15 @@
       <div class="row">
         <div class="col">
           <h3>Construct Query</h3>
-          <form>
+          <form @submit="addDataset">
             <div class="form-group">
               <label for="selectDataset">Select Dataset</label>
-              <select class="form-control" id="selectDataset">
-
+              <select class="form-control" id="selectDataset" v-model="selectedDataset">
+                <option v-for="dataset in allDatasets" v-bind:key="dataset.id">
+                  {{ dataset.value }}
+                </option>
               </select>
+              <span>Selected: {{ selectedDataset }}</span>
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
           </form>
@@ -20,7 +23,20 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
-  name: "QueryConstructor"
+  name: "QueryConstructor",
+  computed: mapGetters(['allDatasets']),
+  data: () => {
+    return {
+      selectedDataset: 'Hospitals'
+    };
+  },
+  methods: {
+    addDataset: (e) => {
+      e.preventDefault();
+    }
+  }
 }
 </script>

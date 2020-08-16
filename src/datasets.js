@@ -1,4 +1,4 @@
-export const datasets = [
+const datasets = [
     {'id': 'hospitals', 'value': "Hospitals"},
     {'id': 'census', 'value': "Census"},
     {'id': 'electrical_substations', 'value': "Electrical Substations"},
@@ -10,7 +10,7 @@ export const datasets = [
     {'id': 'osm', 'value': "Open Street Maps"}
 ];
 
-export const census_features = [
+const census_features = [
     {'id': 'total_population', 'value': 'Total Population'},
     {'id': 'median_household_income', 'value': 'Avg. Household Income'},
     {'id': 'race', 'value': 'Demographics'},
@@ -18,15 +18,22 @@ export const census_features = [
     {'id': 'poverty', 'value': 'Percentage of population below poverty'},
 ];
 
-export const census_resolution = [
+const census_resolution = [
     {'id': 'county', 'value': 'County'},
     {'id': 'tract', 'value': 'Tract'},
     {'id': 'block', 'value': 'Block'}
 ];
 
-export const census_decades = [
+const census_decades = [
     {'id': '2010', 'value': 2010},
     {'id': '2000', 'value': 2000},
     {'id': '1990', 'value': 1990},
     {'id': '1980', 'value': 1980}
 ];
+
+export default {
+    datasets,
+    census_features,
+    census_decades,
+    census_resolution
+}

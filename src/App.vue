@@ -16,6 +16,6 @@ import QueryConstructor from "@/components/QueryConstructor";
 
 export default {
   name: 'App',
-  components: {QueryConstructor, Navbar}
+  components: {QueryConstructor, Navbar},
 }
 </script>
