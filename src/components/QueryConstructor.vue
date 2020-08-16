@@ -7,12 +7,13 @@
           <form @submit="addDataset">
             <div class="form-group">
               <label for="selectDataset">Select Dataset</label>
-              <select class="form-control" id="selectDataset" v-model="selectedDataset">
+              <select class="form-control" id="selectDataset" v-model="selectedDatasetValue"
+                      @change="updateSelectedDataset($data, allDatasets)">
                 <option v-for="dataset in allDatasets" v-bind:key="dataset.id">
                   {{ dataset.value }}
                 </option>
               </select>
-              <span>Selected: {{ selectedDataset }}</span>
+              <span>Selected: {{ selectedDatasetValue }}</span>
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
           </form>
@@ -23,6 +24,8 @@
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
+
 import {mapGetters} from 'vuex';
 
 export default {
@@ -30,12 +33,16 @@ export default {
   computed: mapGetters(['allDatasets']),
   data: () => {
     return {
-      selectedDataset: 'Hospitals'
+      selectedDatasetValue: 'Hospitals'
     };
   },
   methods: {
     addDataset: (e) => {
       e.preventDefault();
+    },
+    updateSelectedDataset: (data, allDatasets) => {
+      let dataset = allDatasets.filter(item => data.selectedDatasetValue === item.value)[0];
+      console.log(dataset);
     }
   }
 }
