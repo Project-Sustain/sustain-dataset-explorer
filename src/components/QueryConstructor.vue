@@ -41,6 +41,7 @@ export default {
       e.preventDefault();
     },
     updateSelectedDataset: (data, allDatasets) => {
+      // get dataset object associated with selectedDatasetValue
       let dataset = allDatasets.filter(item => data.selectedDatasetValue === item.value)[0];
       console.log(dataset);
     }

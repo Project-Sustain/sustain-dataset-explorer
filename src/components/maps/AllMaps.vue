@@ -5,9 +5,13 @@
 </template>
 
 <script>
+
 import Map3 from "@/components/maps/Map3";
+
 export default {
   name: 'AllMaps',
-  components: {Map3}
+  components: {
+    Map3,
+  }
 }
 </script>

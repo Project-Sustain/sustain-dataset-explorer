@@ -1,26 +1,50 @@
 <template>
   <div>
-    <div id="mapId" ref="mapRef"></div>
+    <div style="width: 100%; height: 100vh">
+      <l-map
+          :zoom="zoom"
+          :center="center"
+          @update:zoom="zoomUpdated"
+          @update:center="centerUpdated"
+          @update:bounds="boundsUpdated"
+      >
+        <l-tile-layer :url="url"></l-tile-layer>
+      </l-map>
+    </div>
   </div>
 </template>
 
 <script>
-import L from 'leaflet';
+/* eslint-disable no-unused-vars */
+
+// import L from 'leaflet';
 
 export default {
   name: 'Map3',
+  data() {
+    return {
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      zoom: 6,
+      center: [37.41, -102.7],
+      bounds: null
+    };
+  },
+  components: {},
   mounted() {
-    let myMap = L.map(this.$refs['mapRef']).setView([42.2, -71.7], 8);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-    }).addTo(myMap);
-
-    L.polygon([
-      [51.509, -0.08],
-      [51.503, -0.06],
-      [51.51, -0.047]
-    ]).addTo(myMap);
+  },
+  methods: {
+    zoomUpdated(zoom) {
+      this.zoom = zoom;
+      console.log('zoom:', zoom);
+    },
+    centerUpdated(center) {
+      this.center = center;
+      console.log('center:', center);
+    },
+    boundsUpdated(bounds) {
+      this.bounds = bounds;
+      console.log('bounds:', bounds);
+    }
   }
 }
 </script>
