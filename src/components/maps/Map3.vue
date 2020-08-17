@@ -8,7 +8,9 @@
           @update:center="centerUpdated"
           @update:bounds="boundsUpdated"
       >
-        <l-tile-layer :url="url"></l-tile-layer>
+        <l-tile-layer :url="url">
+
+        </l-tile-layer>
       </l-map>
     </div>
   </div>

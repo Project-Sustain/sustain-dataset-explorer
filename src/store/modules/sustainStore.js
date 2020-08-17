@@ -19,8 +19,8 @@ const actions = {
     addActiveDataset({commit}, dataset) {
         commit('addActiveDataset', dataset);
     },
-    removeActiveDataset({commit}, dataset) {
-        commit('removeActiveDataset', dataset);
+    removeActiveDataset({commit}, datasetId) {
+        commit('removeActiveDataset', datasetId);
     }
 };
 
@@ -29,8 +29,13 @@ const mutations = {
         state.activeDatasets.push(dataset);
         console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
     },
-    removeActiveDataset(state, dataset) {
-        state.activeDatasets = state.activeDatasets.filter(i => i !== dataset);
+    removeActiveDataset(state, datasetId) {
+        console.log('datasetId:', datasetId);
+
+        state.activeDatasets = state.activeDatasets.filter(i => {
+            let objI = JSON.parse(JSON.stringify(i));
+            return objI.id !== datasetId
+        });
         console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
     }
 };
