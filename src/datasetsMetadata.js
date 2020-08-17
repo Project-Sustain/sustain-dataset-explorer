@@ -1,5 +1,11 @@
 const datasets = [
-    {'id': 'hospitals', 'value': "Hospitals"},
+    {
+        'id': 'hospitals',
+        'value': "Hospitals",
+        properties: {
+
+        }
+    },
     {
         'id': 'census',
         'value': "Census",

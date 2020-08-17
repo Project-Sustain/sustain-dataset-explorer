@@ -20,6 +20,7 @@
 /* eslint-disable no-unused-vars */
 
 // import L from 'leaflet';
+import {mapActions} from 'vuex';
 
 export default {
   name: 'Map3',
@@ -35,17 +36,16 @@ export default {
   mounted() {
   },
   methods: {
+    ...mapActions(['setCurrentBounds']),
     zoomUpdated(zoom) {
       this.zoom = zoom;
-      // console.log('zoom:', zoom);
     },
     centerUpdated(center) {
       this.center = center;
-      // console.log('center:', center);
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
-      // console.log('bounds:', bounds);
+      this.setCurrentBounds(bounds);
     }
   }
 }

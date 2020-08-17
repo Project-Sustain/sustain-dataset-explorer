@@ -1,19 +1,18 @@
-import datasets from '../../datasets';
+import datasetsMetadata from "../../datasetsMetadata";
 
 const state = {
-    datasets: datasets.datasets,
-    data: {},
-    activeDatasets: []
+    datasets: datasetsMetadata.datasets,
+    mapData: {},
+    activeDatasets: [],
+    currentBounds: []   // bounding coordinates of the visible area of the map
 };
 
 const getters = {
-    allDatasets: (state) => {
-        return state.datasets;
-    },
-    activeDatasets: (state) => {
-        return JSON.parse(JSON.stringify(state.activeDatasets));
-    }
-};
+    allDatasets: (state) => state.datasets,
+    activeDatasets: (state) => JSON.parse(JSON.stringify(state.activeDatasets)),
+    mapData: (state) => state.mapData,
+    currentBounds: (state) => state.currentBounds
+}
 
 const actions = {
     addActiveDataset({commit}, dataset) {
@@ -21,22 +20,25 @@ const actions = {
     },
     removeActiveDataset({commit}, datasetId) {
         commit('removeActiveDataset', datasetId);
+    },
+    setCurrentBounds({commit}, bounds) {
+        commit('setCurrentBounds', bounds);
     }
 };
 
 const mutations = {
     addActiveDataset(state, dataset) {
         state.activeDatasets.push(dataset);
-        console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
     },
     removeActiveDataset(state, datasetId) {
-        console.log('datasetId:', datasetId);
-
         state.activeDatasets = state.activeDatasets.filter(i => {
+            // convert to general object from Vue object - https://github.com/vuejs/Discussion/issues/292
             let objI = JSON.parse(JSON.stringify(i));
             return objI.id !== datasetId
         });
-        console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
+    },
+    setCurrentBounds(state, bounds) {
+        state.currentBounds = bounds;
     }
 };
 
