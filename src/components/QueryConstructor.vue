@@ -6,7 +6,6 @@
           <h3>Construct Query</h3>
           <form @submit="addDataset">
             <div class="form-group">
-              <label for="selectDataset">Select Dataset</label>
               <select class="form-control" id="selectDataset" v-model="selectedDatasetValue"
                       @change="updateSelectedDataset()">
                 <option v-for="dataset in allDatasets" v-bind:key="dataset.id">

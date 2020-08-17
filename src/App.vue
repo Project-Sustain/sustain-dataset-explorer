@@ -34,4 +34,8 @@ body {
   /*font-family: 'Quicksand', sans-serif;*/
   font-family: 'Merriweather Sans', sans-serif;
 }
+
+control-label{
+  text-align:left;
+}
 </style>

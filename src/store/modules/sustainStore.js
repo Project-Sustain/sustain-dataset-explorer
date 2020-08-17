@@ -12,7 +12,7 @@ const getters = {
     allDatasets: (state) => state.datasets,
     activeDatasets: (state) => JSON.parse(JSON.stringify(state.activeDatasets)),
     mapData: (state) => state.mapData,
-    currentBounds: (state) => state.currentBounds
+    currentBounds: (state) => state.currentBounds,
 }
 
 const actions = {

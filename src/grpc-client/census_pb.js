@@ -1136,7 +1136,7 @@ proto.census.SpatialRequest.prototype.setCensusresolution = function(value) {
 
 
 /**
- * optional CensusFeature censusFeature = 2;
+ * optional CensusFeature censusFeatureValue = 2;
  * @return {!proto.census.CensusFeature}
  */
 proto.census.SpatialRequest.prototype.getCensusfeature = function() {
@@ -2031,7 +2031,7 @@ proto.census.Predicate.ComparisonOperator = {
 };
 
 /**
- * optional CensusFeature censusFeature = 1;
+ * optional CensusFeature censusFeatureValue = 1;
  * @return {!proto.census.CensusFeature}
  */
 proto.census.Predicate.prototype.getCensusfeature = function() {

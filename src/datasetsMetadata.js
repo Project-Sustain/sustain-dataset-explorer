@@ -20,7 +20,7 @@ const datasets = [
             censusResolutions: [
                 {'id': 'county', 'value': 'County'},
                 {'id': 'tract', 'value': 'Tract'},
-                {'id': 'block', 'value': 'Block'}
+                // {'id': 'block', 'value': 'Block'}
             ],
             censusDecades: [
                 {'id': '2010', 'value': 2010},
