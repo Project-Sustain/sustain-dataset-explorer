@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "type": "noUiSlider",
+      "label": "Dam Length",
+      "model": "DAM_LENGTH",
+      "min": 0,
+      "max": 91087
+    },
+    {
+      "type": "noUiSlider",
+      "label": "Dam Height",
+      "model": "DAM_Height",
+      "min": 0,
+      "max": 770
+    }
+  ]
+}

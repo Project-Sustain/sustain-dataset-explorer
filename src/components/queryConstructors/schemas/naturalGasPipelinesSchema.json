@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "select",
+      "label": "TYPEPIPE",
+      "model": "TYPEPIPE",
+      "values": [
+        "ANY",
+        "Other",
+        "Gathering",
+        "Interstate",
+        "Intrastate"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h5>Hospitals Properties</h5>
     <small>
       <span>{{ model }}</span>
     </small>

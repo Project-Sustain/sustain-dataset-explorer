@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "grpc-web": "^1.2.0",
     "leaflet": "^1.6.0",
+    "nouislider": "^14.6.1",
     "vue": "^2.6.11",
     "vue-form-generator": "^2.3.4",
     "vue2-leaflet": "^2.5.2",

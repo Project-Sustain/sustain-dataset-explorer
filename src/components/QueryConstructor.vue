@@ -34,7 +34,7 @@
 <script>
 /* eslint-disable no-unused-vars,vue/no-unused-components */
 
-import {mapGetters, mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import QueryPipeline from "@/components/QueryPipeline";
 import CensusQueryConstructor from "@/components/queryConstructors/CensusQueryConstructor";
 import HospitalsQueryConstructor from "@/components/queryConstructors/HospitalsQueryConstructor";
@@ -90,8 +90,7 @@ export default {
     },
     updateSelectedDataset() {
       // get dataset object associated with selectedDatasetValue
-      let dataset = this.allDatasets.filter(item => this.selectedDatasetValue === item.value)[0];
-      this.selectedDataset = dataset;
+      this.selectedDataset = this.allDatasets.filter(item => this.selectedDatasetValue === item.value)[0];
 
       this.propertiesElement = this.selectedDataset.propertiesElement;
     },

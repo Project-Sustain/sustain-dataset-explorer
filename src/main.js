@@ -4,7 +4,7 @@ import sustainStore from './store';
 import {LGeoJson, LMap, LMarker, LTileLayer} from "vue2-leaflet";
 import 'leaflet/dist/leaflet.css';
 import VueFormGenerator from "vue-form-generator";
-// import VueFormGenerator from 'vue-form-generator';
+import 'vue-form-generator/dist/vfg.css'
 
 Vue.config.productionTip = false
 

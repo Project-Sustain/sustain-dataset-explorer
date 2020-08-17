@@ -5,7 +5,7 @@ const state = {
     datasets: datasetsMetadata.datasets,
     mapData: {},    // data to visualize
     activeDatasets: [], // datasets active on the map
-    currentBounds: []   // bounding coordinates of the visible area of the map
+    currentBounds: []   // bounding coordinates of visible area of the map
 };
 
 const getters = {

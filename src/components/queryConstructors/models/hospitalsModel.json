@@ -1,4 +1,5 @@
 {
-  "HELIPAD": "Y",
-  "OWNER": "ANY"
+  "HELIPAD": "ANY",
+  "OWNER": "ANY",
+  "NAICS_DESC": "ANY"
 }
