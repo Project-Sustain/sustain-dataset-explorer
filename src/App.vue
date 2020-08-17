@@ -29,4 +29,8 @@ export default {
   width: 100%;
   height: 100vh;
 }
+body {
+  /*font-family: 'Martel', serif;*/
+  font-family: 'Quicksand', sans-serif;
+}
 </style>
