@@ -2,13 +2,13 @@ const datasets = [
     {
         'id': 'hospitals',
         'value': "Hospitals",
-        properties: {
-
-        }
+        'propertiesElement': 'HospitalsQueryConstructor',
+        properties: {}
     },
     {
         'id': 'census',
         'value': "Census",
+        'propertiesElement': 'CensusQueryConstructor',
         properties: {
             censusFeatures: [
                 {'id': 'total_population', 'value': 'Total Population'},
@@ -30,13 +30,42 @@ const datasets = [
             ]
         }
     },
-    {'id': 'electrical_substations', 'value': "Electrical Substations"},
-    {'id': 'dams', 'value': "Dams"},
-    {'id': 'transmission_lines', 'value': "Transmission Lines"},
-    {'id': 'natural_gas_pipelines', 'value': "Natural Gas Pipelines"},
-    {'id': 'flood_zones', 'value': "Flood Zones"},
-    {'id': 'power_plants', 'value': "Power Plants"},
-    {'id': 'osm', 'value': "Open Street Maps"}
+    {
+        'id': 'electrical_substations',
+        'value': "Electrical Substations",
+        'propertiesElement': 'ElectricalSubstationsQueryConstructor',
+
+    },
+    {
+        'id': 'dams',
+        'value': "Dams",
+        'propertiesElement': 'DamsQueryConstructor',
+    },
+    {
+        'id': 'transmission_lines',
+        'value': "Transmission Lines",
+        'propertiesElement': 'TransmissionLinesQueryConstructor',
+    },
+    {
+        'id': 'natural_gas_pipelines',
+        'value': "Natural Gas Pipelines",
+        'propertiesElement': 'NaturalGasPipelinesQueryConstructor',
+    },
+    {
+        'id': 'flood_zones',
+        'value': "Flood Zones",
+        'propertiesElement': 'FloodZonesQueryConstructor',
+    },
+    {
+        'id': 'power_plants',
+        'value': "Power Plants",
+        'propertiesElement': 'PowerPlantsQueryConstructor',
+    },
+    {
+        'id': 'osm',
+        'value': "Open Street Maps",
+        'propertiesElement': 'OSMQueryConstructor',
+    }
 ];
 
 

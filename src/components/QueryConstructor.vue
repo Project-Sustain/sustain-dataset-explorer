@@ -15,6 +15,8 @@
               </select>
               <!-- <span>Selected: {{ selectedDatasetValue }}</span>-->
             </div>
+            <!-- Properties selector for the selected dataset -->
+            <component v-bind:is="propertiesElement"></component>
             <button type="submit" class="btn btn-primary">Add</button>
           </form>
         </div>
@@ -31,27 +33,54 @@
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars,vue/no-unused-components */
 
 import {mapGetters, mapActions} from 'vuex';
 import QueryPipeline from "@/components/QueryPipeline";
+import CensusQueryConstructor from "@/components/queryConstructors/CensusQueryConstructor";
+import HospitalsQueryConstructor from "@/components/queryConstructors/HospitalsQueryConstructor";
+import DamsQueryConstructor from "@/components/queryConstructors/DamsQueryConstructor";
+import NaturalGasPipelinesQueryConstructor from "@/components/queryConstructors/NaturalGasPipelinesQueryConstructor";
+import OSMQueryConstructor from "@/components/queryConstructors/OSMQueryConstructor";
+import PowerPlantsQueryConstructor from "@/components/queryConstructors/PowerPlantsQueryConstructor";
+import TransmissionLinesQueryConstructor from "@/components/queryConstructors/TransmissionLinesQueryConstructor";
+import FloodZonesQueryConstructor from "@/components/queryConstructors/FloodZonesQueryConstructor";
+import ElectricalSubstationsQueryConstructor
+  from "@/components/queryConstructors/ElectricalSubstationsQueryConstructor";
 
 export default {
   name: "QueryConstructor",
-  components: {QueryPipeline},
-  computed: mapGetters(['allDatasets']),
+  components: {
+    QueryPipeline,
+    CensusQueryConstructor,
+    HospitalsQueryConstructor,
+    DamsQueryConstructor,
+    NaturalGasPipelinesQueryConstructor,
+    OSMQueryConstructor,
+    PowerPlantsQueryConstructor,
+    TransmissionLinesQueryConstructor,
+    FloodZonesQueryConstructor,
+    ElectricalSubstationsQueryConstructor
+  },
+  computed: {
+    ...mapGetters(['allDatasets', 'activeDatasets']),
+  },
   data: function () {
     return {
       selectedDatasetValue: null,
       selectedDataset: null,
+      value: true,
+      propertiesElement: ''
     };
   },
   mounted() {
     if (this.allDatasets.length < 1) {
       console.error('no dataset information found');
     }
+    // init
     this.selectedDataset = this.allDatasets[0];
     this.selectedDatasetValue = this.allDatasets[0].value;
+    this.propertiesElement = this.allDatasets[0].propertiesElement;
   },
   methods: {
     ...mapActions(['addActiveDataset', 'removeActiveDataset']),
@@ -64,6 +93,8 @@ export default {
       // get dataset object associated with selectedDatasetValue
       let dataset = this.allDatasets.filter(item => this.selectedDatasetValue === item.value)[0];
       this.selectedDataset = dataset;
+
+      this.propertiesElement = this.selectedDataset.propertiesElement;
     },
   }
 }

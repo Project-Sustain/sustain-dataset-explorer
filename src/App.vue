@@ -31,6 +31,7 @@ export default {
 }
 body {
   /*font-family: 'Martel', serif;*/
-  font-family: 'Quicksand', sans-serif;
+  /*font-family: 'Quicksand', sans-serif;*/
+  font-family: 'Merriweather Sans', sans-serif;
 }
 </style>
