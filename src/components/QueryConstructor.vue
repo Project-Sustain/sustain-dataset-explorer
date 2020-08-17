@@ -26,28 +26,33 @@
 <script>
 /* eslint-disable no-unused-vars */
 
-import {mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
   name: "QueryConstructor",
   computed: mapGetters(['allDatasets']),
   data: function () {
     return {
-      selectedDatasetValue: 'Hospitals'
+      selectedDatasetValue: 'Hospitals',
+      selectedDataset: null
     };
   },
   methods: {
+    ...mapActions(['addActiveDataset', 'removeActiveDataset']),
     // add dataset to query pipeline
     addDataset(e) {
       e.preventDefault();
+      // console.log('addDataset');
+      // console.log('selectedDataset:', this.selectedDataset);
+      this.addActiveDataset(this.selectedDataset);
     },
     updateSelectedDataset() {
       // get dataset object associated with selectedDatasetValue
-      console.log('allDatasets:', this.allDatasets);
-      console.log('selectedDatasetValue:', this.selectedDatasetValue);
+      // console.log('allDatasets:', this.allDatasets);
+      // console.log('selectedDatasetValue:', this.selectedDatasetValue);
       let dataset = this.allDatasets.filter(item => this.selectedDatasetValue === item.value)[0];
-      console.log(JSON.parse(JSON.stringify(dataset)));
-    }
+      this.selectedDataset = dataset;
+    },
   }
 }
 </script>

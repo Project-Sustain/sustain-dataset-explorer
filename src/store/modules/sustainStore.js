@@ -15,15 +15,24 @@ const getters = {
     }
 };
 
-const actions = {};
+const actions = {
+    addActiveDataset({commit}, dataset) {
+        commit('addActiveDataset', dataset);
+    },
+    removeActiveDataset({commit}, dataset) {
+        commit('removeActiveDataset', dataset);
+    }
+};
 
 const mutations = {
     addActiveDataset(state, dataset) {
-        state.activeDatasets = state.activeDatasets.push(dataset);
+        state.activeDatasets.push(dataset);
+        // console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
     },
-    // removeActiveDataset(state, dataset) {
-    //
-    // }
+    removeActiveDataset(state, dataset) {
+        state.activeDatasets = state.activeDatasets.filter(i => i !== dataset);
+        // console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
+    }
 };
 
 export default {
