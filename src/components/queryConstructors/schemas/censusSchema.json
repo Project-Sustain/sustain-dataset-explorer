@@ -1,0 +1,36 @@
+{
+  "fields": [
+    {
+      "type": "select",
+      "label": "Census Feature",
+      "model": "censusFeature",
+      "values": [
+        "Total Population",
+        "Population By Age",
+        "Avg. Household Income",
+        "Demographics",
+        "No. of people below poverty level"
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Census Resolution",
+      "model": "censusResolution",
+      "values": [
+        "County",
+        "Tract"
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Census Decade",
+      "model": "censusDecade",
+      "values": [
+        "2010",
+        "2000",
+        "1990",
+        "1980"
+      ]
+    }
+  ]
+}

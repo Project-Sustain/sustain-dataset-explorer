@@ -38,4 +38,8 @@ body {
 control-label{
   text-align:left;
 }
+
+small span {
+  color: crimson;
+}
 </style>

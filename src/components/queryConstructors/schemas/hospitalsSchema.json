@@ -1,0 +1,29 @@
+{
+  "fields": [
+    {
+      "type": "select",
+      "label": "Helipad Available",
+      "model": "HELIPAD",
+      "values": [
+        "Y",
+        "N"
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Owner",
+      "model": "OWNER",
+      "values": [
+        "ANY",
+        "GOVERNMENT - FEDERAL",
+        "PROPRIETARY",
+        "LIMITED LIABILITY COMPANY",
+        "NON-PROFIT",
+        "NOT AVAILABLE",
+        "GOVERNMENT - LOCAL",
+        "GOVERNMENT - DISTRICT/AUTHORITY",
+        "GOVERNMENT - STATE"
+      ]
+    }
+  ]
+}

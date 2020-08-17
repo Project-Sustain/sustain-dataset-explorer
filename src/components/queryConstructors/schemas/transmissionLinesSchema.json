@@ -1,0 +1,33 @@
+{
+  "fields": [
+    {
+      "type": "select",
+      "label": "Status",
+      "model": "STATUS",
+      "values": [
+        "ANY",
+        "IN SERVICE",
+        "PROPOSED",
+        "UNDER CONST",
+        "NOT AVAILABLE",
+        "INACTIVE"
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Voltage Class",
+      "model": "VOLT_CLASS",
+      "values": [
+        "ANY",
+        "DC",
+        "500",
+        "735 AND ABOVE",
+        "NOT AVAILABLE",
+        "100-161",
+        "UNDER 100",
+        "345",
+        "220-287"
+      ]
+    }
+  ]
+}
