@@ -35,15 +35,15 @@ export default {
   methods: {
     zoomUpdated(zoom) {
       this.zoom = zoom;
-      console.log('zoom:', zoom);
+      // console.log('zoom:', zoom);
     },
     centerUpdated(center) {
       this.center = center;
-      console.log('center:', center);
+      // console.log('center:', center);
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
-      console.log('bounds:', bounds);
+      // console.log('bounds:', bounds);
     }
   }
 }

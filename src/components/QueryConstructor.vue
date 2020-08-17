@@ -8,7 +8,7 @@
             <div class="form-group">
               <label for="selectDataset">Select Dataset</label>
               <select class="form-control" id="selectDataset" v-model="selectedDatasetValue"
-                      @change="updateSelectedDataset($data, allDatasets)">
+                      @change="updateSelectedDataset()">
                 <option v-for="dataset in allDatasets" v-bind:key="dataset.id">
                   {{ dataset.value }}
                 </option>
@@ -31,19 +31,22 @@ import {mapGetters} from 'vuex';
 export default {
   name: "QueryConstructor",
   computed: mapGetters(['allDatasets']),
-  data: () => {
+  data: function () {
     return {
       selectedDatasetValue: 'Hospitals'
     };
   },
   methods: {
-    addDataset: (e) => {
+    // add dataset to query pipeline
+    addDataset(e) {
       e.preventDefault();
     },
-    updateSelectedDataset: (data, allDatasets) => {
+    updateSelectedDataset() {
       // get dataset object associated with selectedDatasetValue
-      let dataset = allDatasets.filter(item => data.selectedDatasetValue === item.value)[0];
-      console.log(dataset);
+      console.log('allDatasets:', this.allDatasets);
+      console.log('selectedDatasetValue:', this.selectedDatasetValue);
+      let dataset = this.allDatasets.filter(item => this.selectedDatasetValue === item.value)[0];
+      console.log(JSON.parse(JSON.stringify(dataset)));
     }
   }
 }

@@ -1,18 +1,30 @@
 import datasets from '../../datasets';
 
 const state = {
-    data: {}
+    datasets: datasets.datasets,
+    data: {},
+    activeDatasets: []
 };
 
 const getters = {
-    allDatasets: () => {
-        return datasets.datasets;
+    allDatasets: (state) => {
+        return state.datasets;
     },
+    activeDatasets: (state) => {
+        return state.activeDatasets;
+    }
 };
 
 const actions = {};
 
-const mutations = {};
+const mutations = {
+    addActiveDataset(state, dataset) {
+        state.activeDatasets = state.activeDatasets.push(dataset);
+    },
+    // removeActiveDataset(state, dataset) {
+    //
+    // }
+};
 
 export default {
     state,
