@@ -11,7 +11,7 @@ const getters = {
         return state.datasets;
     },
     activeDatasets: (state) => {
-        return state.activeDatasets;
+        return JSON.parse(JSON.stringify(state.activeDatasets));
     }
 };
 
@@ -27,11 +27,11 @@ const actions = {
 const mutations = {
     addActiveDataset(state, dataset) {
         state.activeDatasets.push(dataset);
-        // console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
+        console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
     },
     removeActiveDataset(state, dataset) {
         state.activeDatasets = state.activeDatasets.filter(i => i !== dataset);
-        // console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
+        console.log(JSON.parse(JSON.stringify(state.activeDatasets)));
     }
 };
 

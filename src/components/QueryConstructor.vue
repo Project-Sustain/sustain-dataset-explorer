@@ -13,10 +13,17 @@
                   {{ dataset.value }}
                 </option>
               </select>
-              <span>Selected: {{ selectedDatasetValue }}</span>
+              <!-- <span>Selected: {{ selectedDatasetValue }}</span>-->
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
           </form>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <div class="row">
+        <div class="col">
+          <QueryPipeline/>
         </div>
       </div>
     </div>
@@ -27,29 +34,34 @@
 /* eslint-disable no-unused-vars */
 
 import {mapGetters, mapActions} from 'vuex';
+import QueryPipeline from "@/components/QueryPipeline";
 
 export default {
   name: "QueryConstructor",
+  components: {QueryPipeline},
   computed: mapGetters(['allDatasets']),
   data: function () {
     return {
-      selectedDatasetValue: 'Hospitals',
-      selectedDataset: null
+      selectedDatasetValue: null,
+      selectedDataset: null,
     };
+  },
+  mounted() {
+    if (this.allDatasets.length < 1) {
+      console.error('no dataset information found');
+    }
+    this.selectedDataset = this.allDatasets[0];
+    this.selectedDatasetValue = this.allDatasets[0].value;
   },
   methods: {
     ...mapActions(['addActiveDataset', 'removeActiveDataset']),
     // add dataset to query pipeline
     addDataset(e) {
       e.preventDefault();
-      // console.log('addDataset');
-      // console.log('selectedDataset:', this.selectedDataset);
       this.addActiveDataset(this.selectedDataset);
     },
     updateSelectedDataset() {
       // get dataset object associated with selectedDatasetValue
-      // console.log('allDatasets:', this.allDatasets);
-      // console.log('selectedDatasetValue:', this.selectedDatasetValue);
       let dataset = this.allDatasets.filter(item => this.selectedDatasetValue === item.value)[0];
       this.selectedDataset = dataset;
     },
