@@ -1,7 +1,7 @@
 import datasets from '../../datasets';
 
 const state = {
-
+    data: {}
 };
 
 const getters = {

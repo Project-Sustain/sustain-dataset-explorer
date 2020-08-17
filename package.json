@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "envoy": "./getenvoy run standard:1.13.1 -- --config-path ./envoy.yaml",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
