@@ -87,7 +87,12 @@ export default {
     // add dataset to query pipeline
     addDataset(e) {
       e.preventDefault();
-      this.addActiveDataset(this.selectedDataset);
+      console.log('addDataset - selectedDatasetProperties:', this.selectedDatasetProperties);
+      const query = {};
+      query.id = this.selectedDataset.id;
+      query.value = this.selectedDataset.value;
+      query.properties = this.selectedDatasetProperties;
+      this.addActiveDataset(query);
     },
     updateSelectedDataset() {
       // get dataset object associated with selectedDatasetValue
@@ -96,7 +101,7 @@ export default {
       this.propertiesElement = this.selectedDataset.propertiesElement;
     },
     handleChildPropertiesUpdated(value) {
-      console.log('value:', value);
+      this.selectedDatasetProperties = value;
     }
   }
 }
