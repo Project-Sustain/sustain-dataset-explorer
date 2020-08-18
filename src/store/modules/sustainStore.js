@@ -36,7 +36,7 @@ const actions = {
 const mutations = {
     addActiveDataset(state, query) {
         const parsedQuery = JSON.parse(JSON.stringify(query));
-        // console.log('parsedQuery:', parsedQuery);
+
         state.activeDatasets.push(parsedQuery);
     },
     removeActiveDataset(state, datasetId) {

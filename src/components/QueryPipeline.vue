@@ -14,7 +14,7 @@
           </svg>
         </div>
         <!--        <p class="mb-1">{{ dataset.properties }}</p>-->
-        <small>{{ dataset.properties }}</small>
+        <small style="color: green">{{ dataset.properties }}</small>
       </a>
     </div>
 

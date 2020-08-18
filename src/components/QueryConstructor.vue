@@ -87,10 +87,10 @@ export default {
     // add dataset to query pipeline
     addDataset(e) {
       e.preventDefault();
-      console.log('addDataset - selectedDatasetProperties:', this.selectedDatasetProperties);
       const query = {};
       query.id = this.selectedDataset.id;
       query.value = this.selectedDataset.value;
+      query.mapElement = this.selectedDataset.mapElement;
       query.properties = this.selectedDatasetProperties;
       this.addActiveDataset(query);
     },

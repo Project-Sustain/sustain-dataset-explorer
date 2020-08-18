@@ -9,8 +9,8 @@
           @update:bounds="boundsUpdated"
       >
         <l-tile-layer :url="url">
-
         </l-tile-layer>
+        <HospitalsMap/>
       </l-map>
     </div>
   </div>
@@ -21,6 +21,7 @@
 
 // import L from 'leaflet';
 import {mapActions} from 'vuex';
+import HospitalsMap from "@/components/maps/HospitalsMap";
 
 export default {
   name: 'Map3',
@@ -32,20 +33,25 @@ export default {
       bounds: null
     };
   },
-  components: {},
+  components: {HospitalsMap},
   mounted() {
   },
   methods: {
     ...mapActions(['setCurrentBounds']),
     zoomUpdated(zoom) {
       this.zoom = zoom;
+      this.updateMapData();
     },
     centerUpdated(center) {
       this.center = center;
+      this.updateMapData();
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
       this.setCurrentBounds(bounds);
+    },
+    updateMapData() {
+
     }
   }
 }

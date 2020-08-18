@@ -49,7 +49,7 @@ let requestGeoJson = `{
     }`;
 
 module.exports = {
-    client: client,
-    makeGeoJson: makeGeoJson,
-    requestGeoJson: requestGeoJson
-}
+    client,
+    makeGeoJson,
+    requestGeoJson
+};
