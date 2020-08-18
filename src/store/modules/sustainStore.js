@@ -26,7 +26,7 @@ const actions = {
         commit('setCurrentBounds', bounds);
     },
     addMapData({commit}, newMapData) {
-        commit('addMapDaa', newMapData);
+        commit('addMapData', newMapData);
     },
     removeMapData({commit}, id) {
         commit('removeMapData', id);
@@ -47,13 +47,13 @@ const mutations = {
     setCurrentBounds(state, bounds) {
         state.currentBounds = bounds;
     },
-    addMapDaa(state, newMapData) {
+    addMapData(state, newMapData) {
         // TODO: update state.mapData with newMapData
         state.mapData.push(newMapData);
     },
     removeMapData(state, id) {
 
-    }
+    },
 };
 
 export default {

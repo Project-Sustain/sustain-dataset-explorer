@@ -15,7 +15,7 @@
               <!-- <span>Selected: {{ selectedDatasetValue }}</span>-->
             </div>
             <!-- Properties selector for the selected dataset -->
-            <component v-bind:is="propertiesElement"></component>
+            <component v-bind:is="propertiesElement" @childPropertiesUpdated="handleChildPropertiesUpdated"></component>
             <button type="submit" class="btn btn-primary">Add</button>
           </form>
         </div>
@@ -69,7 +69,8 @@ export default {
       selectedDatasetValue: null,
       selectedDataset: null,
       value: true,
-      propertiesElement: ''
+      propertiesElement: '',
+      selectedDatasetProperties: ''
     };
   },
   mounted() {
@@ -94,6 +95,9 @@ export default {
 
       this.propertiesElement = this.selectedDataset.propertiesElement;
     },
+    handleChildPropertiesUpdated(value) {
+      console.log('value:', value);
+    }
   }
 }
 </script>

@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "select",
+      "label": "type",
+      "model": "TYPE",
+      "values": [
+        "ALL",
+        "POINTS",
+        "LINES",
+        "MULTI LINES",
+        "POLYGONS"
+      ]
+    }
+  ]
+}

@@ -6,6 +6,7 @@
     <vue-form-generator
         :schema="schema"
         :model="model"
+        @model-updated="updateSelectedProperties"
     ></vue-form-generator>
   </div>
 </template>
@@ -21,7 +22,15 @@ export default {
       model: censusModel,
       schema: censusSchema,
     };
+  },
+  methods: {
+    updateSelectedProperties() {
+      let properties = JSON.parse(JSON.stringify(this.model));
+      this.$emit('childPropertiesUpdated', properties);
+    }
+  },
+  mounted() {
+    this.updateSelectedProperties();
   }
-
 }
 </script>
