@@ -15,7 +15,6 @@
 import VueFormGenerator from "vue-form-generator";
 import model from "@/components/queryConstructors/models/damsModel.json";
 import schema from "@/components/queryConstructors/schemas/damsSchema.json";
-import {mapActions} from 'vuex';
 
 export default {
   name: 'DamsQueryConstructor',
@@ -27,13 +26,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['setSelectedDatasetProperties']),
     updateSelectedProperties() {
-      console.log('model', this.model);
+      let properties = JSON.parse(JSON.stringify(this.model));
+      this.$emit('childPropertiesUpdated', properties);
     }
   },
-  mounted() {
-    // this.setSelectedDatasetProperties('dams', this.model);
-  }
 }
 </script>
+
+<style scoped>
+@import "../../resources/css/nouislider.css";
+</style>

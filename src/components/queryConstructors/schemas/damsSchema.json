@@ -4,13 +4,27 @@
       "type": "noUiSlider",
       "label": "Dam Length",
       "model": "DAM_LENGTH",
-      "min": 0,
-      "max": 91087
+      "noUiSliderOptions": {
+        "start": [0, 91087],
+        "range": {
+          "min": 0,
+          "max": 91087
+        },
+        "tooltips": [true, true]
+      }
     },
     {
       "type": "noUiSlider",
       "label": "Dam Height",
-      "model": "DAM_Height",
+      "model": "DAM_HEIGHT",
+      "noUiSliderOptions": {
+        "start": [0, 770],
+        "range": {
+          "min": 0,
+          "max": 770
+        },
+        "tooltips": [true, true]
+      },
       "min": 0,
       "max": 770
     }

@@ -21,7 +21,6 @@ import {LMarker} from 'vue2-leaflet';
 export default {
   name: 'HospitalsMap',
   computed: mapGetters(['currentBounds']),
-  // eslint-disable-next-line vue/no-unused-components
   components: {'l-marker': LMarker},
   data() {
     return {
@@ -31,11 +30,6 @@ export default {
         iconSize: [25, 25]
       })
     };
-  },
-  mounted() {
-    // this.hospitals.forEach(i => {
-    //   console.log(JSON.parse(JSON.stringify(i)));
-    // })
   }
 }
 </script>
