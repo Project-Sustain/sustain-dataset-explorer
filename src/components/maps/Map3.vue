@@ -10,18 +10,20 @@
       >
         <l-tile-layer :url="url">
         </l-tile-layer>
-        <HospitalsMap />
+        <!--        <HospitalsMap/>-->
+        <CensusMap/>
       </l-map>
     </div>
   </div>
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars,vue/no-unused-components */
 
 // import L from 'leaflet';
 import {mapActions} from 'vuex';
 import HospitalsMap from "@/components/maps/HospitalsMap";
+import CensusMap from "@/components/maps/CensusMap";
 
 export default {
   name: 'Map3',
@@ -33,27 +35,20 @@ export default {
       bounds: null
     };
   },
-  components: {HospitalsMap},
-  mounted() {
-  },
+  components: {CensusMap, HospitalsMap},
   methods: {
     ...mapActions(['setCurrentBounds']),
     zoomUpdated(zoom) {
       this.zoom = zoom;
-      this.updateMapData();
     },
     centerUpdated(center) {
       this.center = center;
-      this.updateMapData();
     },
     boundsUpdated(bounds) {
       this.bounds = bounds;
       this.setCurrentBounds(bounds);
     },
-    updateMapData() {
-
-    }
-  }
+  },
 }
 </script>
 
