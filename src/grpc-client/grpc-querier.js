@@ -2,7 +2,7 @@ const {CensusClient} = require('./census_grpc_web_pb');
 
 let client = new CensusClient('http://' + window.location.hostname + ':9092', 'for-dataset-explorer');
 
-function makeGeoJson(southwest, northeast) {
+let makeGeoJson = function (southwest, northeast) {
     const geo = {type: "Feature", properties: {}};
     const geometry = {
         type: "polygon", coordinates: [[

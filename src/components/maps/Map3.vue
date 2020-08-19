@@ -10,7 +10,7 @@
       >
         <l-tile-layer :url="url">
         </l-tile-layer>
-        <HospitalsMap/>
+        <HospitalsMap />
       </l-map>
     </div>
   </div>
