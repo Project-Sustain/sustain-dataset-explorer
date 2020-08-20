@@ -1,13 +1,19 @@
 <template>
   <div>
-    <!--    <l-polygon>-->
+    <!--    <l-polygon v-for="datum in censusData"-->
+    <!--               :lat-lngs="datum.geometry.coordinates"-->
+    <!--               :key="datum.properties.GISJOIN"-->
+    <!--               :color="datum.color"-->
+    <!--    >-->
     <!--    </l-polygon>-->
-    <l-geo-json :geojson="censusData"></l-geo-json>
+    <l-geo-json :geojson="censusData"
+                v-on:eachFeature="onEachFeature()"
+    ></l-geo-json>
   </div>
 </template>
 
 <script>
-/* eslint-disable vue/no-unused-components */
+/* eslint-disable vue/no-unused-components,no-unused-vars */
 
 import {mapGetters} from 'vuex';
 import {LPolygon, LGeoJson} from 'vue2-leaflet';
@@ -36,11 +42,14 @@ export default {
     }
   },
   methods: {
+    onEachFeature() {
+      console.log('on each feature');
+    },
     updateMapData(geoJson) {
       console.log('querying');
       let censusData = [];
       const spatialRequest = new SpatialRequest();
-      spatialRequest.setCensusresolution(2);  // county
+      spatialRequest.setCensusresolution(1);  // county
       spatialRequest.setCensusfeature(0); // total population
       spatialRequest.setRequestgeojson(geoJson);
       spatialRequest.setSpatialop(0); // GeoWithin
@@ -52,10 +61,57 @@ export default {
       });
       call.on('end', () => {
         console.log('census entries count:', censusData.length);
+        let [min, max] = this.getMinAndMax(censusData);
+        censusData.forEach(datum => {
+          const normalizedValue = this.normalize(datum.values, min, max);
+          const colorPercentage = this.getColorForPercentage(normalizedValue, 0.5);
+          console.log(colorPercentage);
+          datum.color = colorPercentage;
+        });
+
         this.censusData = censusData;
       });
       call.on('err', console.error);
-    }
+    },
+    getMinAndMax(censusData) {
+      let values = [];
+      censusData.forEach(datum => {
+        values.push(datum.values);
+      });
+      let min = Math.min(...values);
+      let max = Math.max(...values);
+      return [min, max];
+    },
+    normalize(val, min, max) {
+      return (val - min) / (max - min);
+    },
+    rbgaToString(rgba) {
+      return "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + rgba[3] + ")";
+    },
+    getColorForPercentage: function (pct, alpha) {
+      if (pct === 0) {
+        pct += 0.00001;
+      } else if (pct % 0.5 === 0) {
+        pct -= 0.00001;
+      }
+      const lower = 0.5 * (Math.floor(Math.abs(pct / 0.5)));
+      const upper = 0.5 * (Math.ceil(Math.abs(pct / 0.5)));
+      const rangePct = (pct - lower) / (upper - lower);
+      const pctLower = 1 - rangePct;
+      const pctUpper = rangePct;
+      const r = Math.floor(this.getColorValue([lower, upper], [pctLower, pctUpper], 0));
+      const g = Math.floor(this.getColorValue([lower, upper], [pctLower, pctUpper], 1));
+      const b = Math.floor(this.getColorValue([lower, upper], [pctLower, pctUpper], 2));
+      return this.rbgaToString([r, g, b, alpha]);
+    },
+    getColorValue: function (bounds, pcts, idx) {
+      const percentageToColor = {
+        0.0: [0, 0, 255],
+        0.5: [0, 255, 0],
+        1.0: [255, 0, 0]
+      };
+      return percentageToColor[bounds[0]][idx] * pcts[0] + percentageToColor[bounds[1]][idx] * pcts[1];
+    },
   }
 }
 </script>

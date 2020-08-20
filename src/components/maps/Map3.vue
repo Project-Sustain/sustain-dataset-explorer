@@ -10,7 +10,7 @@
       >
         <l-tile-layer :url="url">
         </l-tile-layer>
-        <!--        <HospitalsMap/>-->
+        <!-- <HospitalsMap/>-->
         <CensusMap/>
       </l-map>
     </div>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 6,
+      zoom: 10,
       center: [37.41, -102.7],
       bounds: null
     };
