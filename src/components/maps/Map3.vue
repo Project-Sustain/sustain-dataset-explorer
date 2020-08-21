@@ -4,9 +4,10 @@
       <l-map
           :zoom="zoom"
           :center="center"
+          @zoomend="zoomEnded"
+          ref="map3"
           @update:zoom="zoomUpdated"
           @update:center="centerUpdated"
-          @update:bounds="boundsUpdated"
       >
         <l-tile-layer :url="url">
         </l-tile-layer>
@@ -30,7 +31,7 @@ export default {
   data() {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 10,
+      zoom: 4,
       center: [37.41, -102.7],
       bounds: null
     };
@@ -44,10 +45,10 @@ export default {
     centerUpdated(center) {
       this.center = center;
     },
-    boundsUpdated(bounds) {
-      this.bounds = bounds;
-      this.setCurrentBounds(bounds);
-    },
+    zoomEnded() {
+      this.bounds = this.$refs.map3.mapObject.getBounds();
+      this.setCurrentBounds(this.bounds);
+    }
   },
 }
 </script>

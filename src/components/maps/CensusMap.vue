@@ -1,14 +1,12 @@
 <template>
   <div>
-    <!--    <l-polygon v-for="datum in censusData"-->
-    <!--               :lat-lngs="datum.geometry.coordinates"-->
-    <!--               :key="datum.properties.GISJOIN"-->
-    <!--               :color="datum.color"-->
-    <!--    >-->
-    <!--    </l-polygon>-->
-    <l-geo-json :geojson="censusData"
-                v-on:eachFeature="onEachFeature()"
-    ></l-geo-json>
+    <l-polygon v-for="datum in censusData"
+               :lat-lngs="reverseLatLngPolygon(datum.geometry.coordinates)"
+               :key="datum.properties.GISJOIN"
+               :fillOpacity="datum.normalizedValue"
+    >
+      <l-tool-tip>{{ datum.values.toLocaleString() }}</l-tool-tip>
+    </l-polygon>
   </div>
 </template>
 
@@ -16,7 +14,7 @@
 /* eslint-disable vue/no-unused-components,no-unused-vars */
 
 import {mapGetters} from 'vuex';
-import {LPolygon, LGeoJson} from 'vue2-leaflet';
+import {LPolygon, LGeoJson, LTooltip} from 'vue2-leaflet';
 import grpcQuerier from "@/grpc-client/grpc-querier";
 
 const {client} = require('../../grpc-client/grpc-querier');
@@ -27,11 +25,13 @@ export default {
   computed: mapGetters(['currentBounds']),
   components: {
     'l-polygon': LPolygon,
-    'l-geo-json': LGeoJson
+    'l-geo-json': LGeoJson,
+    'l-tool-tip': LTooltip
   },
   data() {
     return {
       censusData: null,
+      featureName: '',
     };
   },
   watch: {
@@ -42,9 +42,6 @@ export default {
     }
   },
   methods: {
-    onEachFeature() {
-      console.log('on each feature');
-    },
     updateMapData(geoJson) {
       console.log('querying');
       let censusData = [];
@@ -65,8 +62,8 @@ export default {
         censusData.forEach(datum => {
           const normalizedValue = this.normalize(datum.values, min, max);
           const colorPercentage = this.getColorForPercentage(normalizedValue, 0.5);
-          console.log(colorPercentage);
           datum.color = colorPercentage;
+          datum.normalizedValue = normalizedValue;
         });
 
         this.censusData = censusData;
@@ -111,6 +108,34 @@ export default {
         1.0: [255, 0, 0]
       };
       return percentageToColor[bounds[0]][idx] * pcts[0] + percentageToColor[bounds[1]][idx] * pcts[1];
+    },
+    rgba2hex(orig) {
+      var a, isPercent,
+          rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+),?([^,\s)]+)?/i),
+          alpha = (rgb && rgb[4] || "").trim(),
+          hex = rgb ?
+              (rgb[1] | 1 << 8).toString(16).slice(1) +
+              (rgb[2] | 1 << 8).toString(16).slice(1) +
+              (rgb[3] | 1 << 8).toString(16).slice(1) : orig;
+      if (alpha !== "") {
+        a = alpha;
+      } else {
+        a = 0.1;
+      }
+
+      a = Math.round(a * 100) / 100;
+      alpha = Math.round(a * 255);
+      var hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
+      hex = hex + hexAlpha;
+
+      return hex;
+    },
+    reverseLatLngPolygon: function (poly) {
+      const out = [];
+      for (let p in poly[0][0]) {
+        out.push([poly[0][0][p][1], poly[0][0][p][0]])
+      }
+      return out;
     },
   }
 }
