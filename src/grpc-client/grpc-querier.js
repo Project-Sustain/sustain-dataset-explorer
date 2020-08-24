@@ -1,6 +1,6 @@
 const {CensusClient} = require('./census_grpc_web_pb');
 
-let client = new CensusClient('http://' + window.location.hostname + ':9092', 'for-dataset-explorer');
+let client = new CensusClient('http://lattice-2.cs.colostate.edu:9092', 'for-dataset-explorer');
 
 let makeGeoJson = function (southwest, northeast) {
     const geo = {type: "Feature", properties: {}};
