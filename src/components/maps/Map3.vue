@@ -5,6 +5,7 @@
           :zoom="zoom"
           :center="center"
           @zoomend="zoomEnded"
+          @moveend="moveEnded"
           ref="map3"
           @update:zoom="zoomUpdated"
           @update:center="centerUpdated"
@@ -48,6 +49,9 @@ export default {
     zoomEnded() {
       this.bounds = this.$refs.map3.mapObject.getBounds();
       this.setCurrentBounds(this.bounds);
+    },
+    moveEnded() {
+      console.log('moveEnded');
     }
   },
 }
