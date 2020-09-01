@@ -20,7 +20,7 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
-              - match: { prefix: "/dataexplorer" }
+              - match: { prefix: "/census.Census/SpatialQuery" }
                 route: { cluster: gRPCServiceForDatasetExplorer }
               - match: { prefix: "/census" }
                 route: { cluster: TargetedQueryServiceCensus }
