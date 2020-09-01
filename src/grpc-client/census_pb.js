@@ -7,11 +7,14 @@
  * @public
  */
 // GENERATED CODE -- DO NOT EDIT!
+
 /* eslint-disable */
+// @ts-nocheck
+//
 
 var jspb = require('google-protobuf');
 var goog = jspb;
-var global = Function('return this')();
+var global = (typeof self == "undefined" ? typeof global == "undefined"? this : global : self);
 
 goog.exportSymbol('proto.census.CensusFeature', null, global);
 goog.exportSymbol('proto.census.CensusResolution', null, global);
@@ -1136,7 +1139,7 @@ proto.census.SpatialRequest.prototype.setCensusresolution = function(value) {
 
 
 /**
- * optional CensusFeature censusFeatureValue = 2;
+ * optional CensusFeature censusFeature = 2;
  * @return {!proto.census.CensusFeature}
  */
 proto.census.SpatialRequest.prototype.getCensusfeature = function() {
@@ -2031,7 +2034,7 @@ proto.census.Predicate.ComparisonOperator = {
 };
 
 /**
- * optional CensusFeature censusFeatureValue = 1;
+ * optional CensusFeature censusFeature = 1;
  * @return {!proto.census.CensusFeature}
  */
 proto.census.Predicate.prototype.getCensusfeature = function() {
