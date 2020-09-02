@@ -14,7 +14,10 @@
         </l-tile-layer>
         <!-- <HospitalsMap/>-->
         <!--        <CensusMap/>-->
-        <DamsMap/>
+        <!--        <DamsMap/>-->
+        <!--        <NaturalGasPipelinesMap/>-->
+        <!--        <TransmissionLinesMap/>-->
+        <PowerPlantsMap/>
       </l-map>
     </div>
   </div>
@@ -28,6 +31,9 @@ import {mapActions} from 'vuex';
 import HospitalsMap from "@/components/maps/HospitalsMap";
 import CensusMap from "@/components/maps/CensusMap";
 import DamsMap from "@/components/maps/DamsMap";
+import NaturalGasPipelinesMap from "@/components/maps/NaturalGasPipelinesMap";
+import TransmissionLinesMap from "@/components/maps/TransmissionLinesMap";
+import PowerPlantsMap from "@/components/maps/PowerPlantsMap";
 
 export default {
   name: 'Map3',
@@ -39,7 +45,7 @@ export default {
       bounds: null
     };
   },
-  components: {DamsMap, CensusMap, HospitalsMap},
+  components: {PowerPlantsMap, TransmissionLinesMap, NaturalGasPipelinesMap, DamsMap, CensusMap, HospitalsMap},
   methods: {
     ...mapActions(['setCurrentBounds']),
     zoomUpdated(zoom) {

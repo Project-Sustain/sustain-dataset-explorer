@@ -55,7 +55,7 @@ export default {
       });
       call.on('error', console.error);
       call.on('end', () => {
-        console.log('hospitals count:', hospitalData.length);
+        console.log('powerPlants count:', hospitalData.length);
         this.hospitals = hospitalData;
       });
     }

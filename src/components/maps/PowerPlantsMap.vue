@@ -1,31 +1,37 @@
 <template>
   <div>
-    <div v-if="dams && dams.length > 0">
-      <l-geo-json
-          :geojson="dams"
-      ></l-geo-json>
+    <div v-if="powerPlants && powerPlants.length > 0">
+      <l-marker v-for="powerPlant in JSON.parse(JSON.stringify(powerPlants))"
+                :key="powerPlant.properties.ID"
+                :lat-lng="[powerPlant.geometry.coordinates[1], powerPlant.geometry.coordinates[0]]"
+                :icon="icon"
+      >
+      </l-marker>
     </div>
   </div>
 </template>
 
 <script>
-
 import {mapGetters} from 'vuex';
-import {LGeoJson} from 'vue2-leaflet';
-import grpcQuerier from "@/grpc-client/grpc-querier";
+import {Icon} from 'leaflet';
+import icon from '../../resources/power-plan-icon.png';
+import {LMarker} from 'vue2-leaflet';
+import grpcQuerier from '../../grpc-client/grpc-querier';
 
 const {client} = require('../../grpc-client/grpc-querier');
 const {DatasetRequest} = require('../../grpc-client/sustain_pb');
 
 export default {
-  name: 'DamsMap',
+  name: 'PowerPlantsMap',
   computed: mapGetters(['currentBounds']),
-  components: {
-    'l-geo-json': LGeoJson
-  },
+  components: {'l-marker': LMarker},
   data() {
     return {
-      dams: null,
+      powerPlants: null,
+      icon: new Icon({
+        iconUrl: icon,
+        iconSize: [25, 25]
+      }),
     };
   },
   watch: {
@@ -37,21 +43,20 @@ export default {
   },
   methods: {
     updateMapData(geoJson) {
-      console.log('querying transmissionLines');
-      let damsData = [];
+      let powerPlantsData = [];
       const datasetRequest = new DatasetRequest();
-      datasetRequest.setDataset(1);
+      datasetRequest.setDataset(5);
       datasetRequest.setSpatialop(0);
       datasetRequest.setRequestgeojson(geoJson);
       let call = client.datasetQuery(datasetRequest);
       call.on('data', (data) => {
         const response = JSON.parse(data.getResponse());
-        damsData.push(response);
+        powerPlantsData.push(response);
       });
       call.on('error', console.error);
       call.on('end', () => {
-        console.log('transmissionLines count:', damsData.length);
-        this.dams = damsData;
+        console.log('powerPlants count:', powerPlantsData.length);
+        this.powerPlants = powerPlantsData;
       });
     }
   },

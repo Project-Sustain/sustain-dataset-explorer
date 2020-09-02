@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="dams && dams.length > 0">
+    <div v-if="transmissionLines && transmissionLines.length > 0">
       <l-geo-json
-          :geojson="dams"
+          :geojson="transmissionLines"
       ></l-geo-json>
     </div>
   </div>
@@ -18,14 +18,14 @@ const {client} = require('../../grpc-client/grpc-querier');
 const {DatasetRequest} = require('../../grpc-client/sustain_pb');
 
 export default {
-  name: 'DamsMap',
+  name: 'TransmissionLinesMap',
   computed: mapGetters(['currentBounds']),
   components: {
     'l-geo-json': LGeoJson
   },
   data() {
     return {
-      dams: null,
+      transmissionLines: null,
     };
   },
   watch: {
@@ -38,20 +38,20 @@ export default {
   methods: {
     updateMapData(geoJson) {
       console.log('querying transmissionLines');
-      let damsData = [];
+      let transmissionLinesData = [];
       const datasetRequest = new DatasetRequest();
-      datasetRequest.setDataset(1);
+      datasetRequest.setDataset(3);
       datasetRequest.setSpatialop(0);
       datasetRequest.setRequestgeojson(geoJson);
       let call = client.datasetQuery(datasetRequest);
       call.on('data', (data) => {
         const response = JSON.parse(data.getResponse());
-        damsData.push(response);
+        transmissionLinesData.push(response);
       });
       call.on('error', console.error);
       call.on('end', () => {
-        console.log('transmissionLines count:', damsData.length);
-        this.dams = damsData;
+        console.log('transmissionLines count:', transmissionLinesData.length);
+        this.transmissionLines = transmissionLinesData;
       });
     }
   },
