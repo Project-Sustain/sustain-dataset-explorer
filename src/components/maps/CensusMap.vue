@@ -18,7 +18,7 @@ import {LGeoJson, LPolygon, LTooltip} from 'vue2-leaflet';
 import grpcQuerier from "@/grpc-client/grpc-querier";
 
 const {client} = require('../../grpc-client/grpc-querier');
-const {SpatialRequest} = require('../../grpc-client/census_pb');
+const {CensusRequest} = require('../../grpc-client/sustain_pb');
 
 export default {
   name: "CensusMap",
@@ -45,12 +45,12 @@ export default {
     updateMapData(geoJson) {
       console.log('querying');
       let censusData = [];
-      const spatialRequest = new SpatialRequest();
-      spatialRequest.setCensusresolution(1);  // county
-      spatialRequest.setCensusfeature(0); // total population
-      spatialRequest.setRequestgeojson(geoJson);
-      spatialRequest.setSpatialop(0); // GeoWithin
-      let call = client.spatialQuery(spatialRequest);
+      const censusRequest = new CensusRequest();
+      censusRequest.setCensusresolution(1);  // county
+      censusRequest.setCensusfeature(0); // total population
+      censusRequest.setRequestgeojson(geoJson);
+      censusRequest.setSpatialop(0); // GeoWithin
+      let call = client.censusQuery(censusRequest);
       call.on('data', (data) => {
         let response = JSON.parse(data.array[1]);
         response.values = JSON.parse(data.array[0])["2010_total_population"];

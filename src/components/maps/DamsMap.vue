@@ -15,7 +15,7 @@ import {LGeoJson} from 'vue2-leaflet';
 import grpcQuerier from "@/grpc-client/grpc-querier";
 
 const {client} = require('../../grpc-client/grpc-querier');
-const {DatasetRequest} = require('../../grpc-client/census_pb');
+const {DatasetRequest} = require('../../grpc-client/sustain_pb');
 
 export default {
   name: 'DamsMap',

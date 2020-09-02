@@ -1,6 +1,6 @@
-const {CensusClient} = require('./census_grpc_web_pb');
+const {SustainClient} = require('./sustain_grpc_web_pb');
 
-let client = new CensusClient('http://' + window.location.hostname + ':9092', 'for-dataset-explorer');
+let client = new SustainClient('http://' + window.location.hostname + ':9092', 'for-dataset-explorer');
 
 let makeGeoJson = function (southwest, northeast) {
     const geo = {type: "Feature", properties: {}};
