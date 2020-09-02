@@ -13,7 +13,8 @@
         <l-tile-layer :url="url">
         </l-tile-layer>
         <!-- <HospitalsMap/>-->
-        <CensusMap/>
+        <!--        <CensusMap/>-->
+        <DamsMap/>
       </l-map>
     </div>
   </div>
@@ -26,18 +27,19 @@
 import {mapActions} from 'vuex';
 import HospitalsMap from "@/components/maps/HospitalsMap";
 import CensusMap from "@/components/maps/CensusMap";
+import DamsMap from "@/components/maps/DamsMap";
 
 export default {
   name: 'Map3',
   data() {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 4,
+      zoom: 8,
       center: [37.41, -102.7],
       bounds: null
     };
   },
-  components: {CensusMap, HospitalsMap},
+  components: {DamsMap, CensusMap, HospitalsMap},
   methods: {
     ...mapActions(['setCurrentBounds']),
     zoomUpdated(zoom) {
@@ -51,7 +53,7 @@ export default {
       this.setCurrentBounds(this.bounds);
     },
     moveEnded() {
-      console.log('moveEnded');
+      // console.log('moveEnded');
     }
   },
 }

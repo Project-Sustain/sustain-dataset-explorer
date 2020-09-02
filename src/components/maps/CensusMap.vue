@@ -14,7 +14,7 @@
 /* eslint-disable vue/no-unused-components,no-unused-vars */
 
 import {mapGetters} from 'vuex';
-import {LPolygon, LGeoJson, LTooltip} from 'vue2-leaflet';
+import {LGeoJson, LPolygon, LTooltip} from 'vue2-leaflet';
 import grpcQuerier from "@/grpc-client/grpc-querier";
 
 const {client} = require('../../grpc-client/grpc-querier');
@@ -61,15 +61,14 @@ export default {
         let [min, max] = this.getMinAndMax(censusData);
         censusData.forEach(datum => {
           const normalizedValue = this.normalize(datum.values, min, max);
-          const colorPercentage = this.getColorForPercentage(normalizedValue, 0.5);
-          datum.color = colorPercentage;
+          datum.color = this.getColorForPercentage(normalizedValue, 0.5);
           datum.normalizedValue = normalizedValue;
         });
 
         this.censusData = censusData;
       });
       call.on('err', console.error);
-    },
+    },  // end of updateMapData()
     getMinAndMax(censusData) {
       let values = [];
       censusData.forEach(datum => {
