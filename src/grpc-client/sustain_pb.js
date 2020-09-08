@@ -7,6 +7,7 @@
  * @public
  */
 // GENERATED CODE -- DO NOT EDIT!
+
 /* eslint-disable */
 
 var jspb = require('google-protobuf');
@@ -2350,7 +2351,8 @@ proto.sustain.IntraDatasetOp = {
 proto.sustain.CensusResolution = {
   STATE: 0,
   COUNTY: 1,
-  TRACT: 2
+  TRACT: 2,
+  BLOCK: 3
 };
 
 /**

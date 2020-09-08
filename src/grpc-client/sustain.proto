@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+
 option java_multiple_files = true;
 option java_package = "org.sustain";
 option java_outer_classname = "SustainQueryService";
@@ -118,6 +119,7 @@ enum CensusResolution {
   State = 0;
   County = 1;
   Tract = 2;
+  Block = 3;
 }
 
 enum Decade {

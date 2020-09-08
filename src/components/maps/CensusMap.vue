@@ -22,7 +22,7 @@ const {CensusRequest} = require('../../grpc-client/sustain_pb');
 
 export default {
   name: "CensusMap",
-  computed: mapGetters(['currentBounds']),
+  computed: mapGetters(['currentBounds', 'currentZoomLevel']),
   components: {
     'l-polygon': LPolygon,
     'l-geo-json': LGeoJson,
@@ -39,6 +39,9 @@ export default {
       const bounds = JSON.parse(JSON.stringify(this.currentBounds));
       const geoJson = grpcQuerier.makeGeoJson(bounds._southWest, bounds._northEast);
       this.updateMapData(geoJson);
+    },
+    currentZoomLevel: function () {
+      console.log(this.currentZoomLevel);
     }
   },
   methods: {
@@ -46,7 +49,17 @@ export default {
       console.log('querying');
       let censusData = [];
       const censusRequest = new CensusRequest();
-      censusRequest.setCensusresolution(1);  // county
+
+      // set census resolution according to currentZoomLevel
+      if (this.currentZoomLevel >= 14) {
+        censusRequest.setCensusresolution(3);  // block
+      } else if (this.currentZoomLevel >= 10) {
+        censusRequest.setCensusresolution(2);  // tract
+      } else {
+        censusRequest.setCensusresolution(1);  // county
+      }
+
+
       censusRequest.setCensusfeature(0); // total population
       censusRequest.setRequestgeojson(geoJson);
       censusRequest.setSpatialop(0); // GeoWithin

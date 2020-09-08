@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 import datasetsMetadata from "../../datasetsMetadata";
+import {zoom} from "leaflet/src/control/Control.Zoom";
 
 const state = {
     datasets: datasetsMetadata.datasets,
     mapData: {},    // data to visualize
     activeDatasets: [], // datasets active on the map
-    currentBounds: []   // bounding coordinates of visible area of the map
+    currentBounds: [],   // bounding coordinates of visible area of the map
+    currentZoomLevel: 16
 };
 
 const getters = {
@@ -13,6 +15,7 @@ const getters = {
     activeDatasets: (state) => JSON.parse(JSON.stringify(state.activeDatasets)),
     mapData: (state) => state.mapData,
     currentBounds: (state) => state.currentBounds,
+    currentZoomLevel: (state) => state.currentZoomLevel
 }
 
 const actions = {
@@ -30,6 +33,9 @@ const actions = {
     },
     removeMapData({commit}, id) {
         commit('removeMapData', id);
+    },
+    setCurrentZoomLevel({commit}, zoomLevel) {
+        commit('setCurrentZoomLevel', zoomLevel);
     }
 };
 
@@ -52,6 +58,9 @@ const mutations = {
     addMapData(state, newMapData) {
         // TODO: update state.mapData with newMapData
         state.mapData.push(newMapData);
+    },
+    setCurrentZoomLevel(state, zoomLevel) {
+        state.currentZoomLevel = zoomLevel;
     },
     removeMapData(state, id) {
 
