@@ -21,7 +21,7 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
-              - match: { prefix: "/sustainServer" }
+              - match: { prefix: "/sustain.Sustain" }
                 route: { cluster: gRPCServiceForMap2}
               - match: { prefix: "/census.Census/SpatialQuery" }
                 route: { cluster: gRPCServiceForDatasetExplorer }
