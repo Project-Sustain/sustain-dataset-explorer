@@ -21,6 +21,8 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
+              - match: { prefix: "/sustainServer" }
+                route: {prefix: gRPCServiceForMap2}
               - match: { prefix: "/census.Census/SpatialQuery" }
                 route: { cluster: gRPCServiceForDatasetExplorer }
               - match: { prefix: "/census" }
@@ -61,3 +63,9 @@ static_resources:
     http2_protocol_options: {}
     lb_policy: round_robin
     hosts: [{ socket_address: { address: "lattice-1.cs.colostate.edu", port_value: 50051 }}]
+  - name: gRPCServiceForMap2
+    connect_timeout: 0.25s
+    type: logical_dns
+    http2_protocol_options: {}
+    lb_policy: round_robin
+    hosts: [{ socket_address: { address: "lattice-1.cs.colostate.edu", port_value: 9091 }}]
