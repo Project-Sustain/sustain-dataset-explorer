@@ -22,7 +22,9 @@ static_resources:
               domains: ["*"]
               routes:
               - match: { prefix: "/sustain.Sustain" }
-                route: { cluster: gRPCServiceForMap2}
+                route: { cluster: gRPCServiceForMap2,
+                         timeout: 0,
+                         max_grpc_timeout: 0}
               - match: { prefix: "/census.Census/SpatialQuery" }
                 route: { cluster: gRPCServiceForDatasetExplorer }
               - match: { prefix: "/census" }
