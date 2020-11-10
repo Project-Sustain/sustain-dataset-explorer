@@ -48,8 +48,14 @@ export default {
       let sviDataCopy = [...this.sviData];
       let i = 1;
       sviDataCopy.forEach(svi => {
-        let newRplThemes = i++/1000;
-
+        let newRplThemes = 0;
+        let denominator = 0;
+        let numerator = 0;
+        for (let [key, value] of Object.entries(this.sviWeights)) {
+          numerator += svi[key] * value;
+          denominator += value;
+        }
+        newRplThemes = numerator / denominator;
 
         svi.RPL_THEMES = newRplThemes;
       })
