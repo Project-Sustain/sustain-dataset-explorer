@@ -5,7 +5,7 @@
                :lat-lngs="reverseLatLngPolygon(svi.geoJson.geometry.coordinates)"
                :fillOpacity="svi.normalizedValue"
     >
-      <l-tool-tip>{{ svi.RPL_THEMES}}</l-tool-tip>
+      <l-tool-tip>{{ svi.RPL_THEMES }}</l-tool-tip>
     </l-polygon>
   </div>
 </template>
@@ -22,7 +22,7 @@ const {SviRequest} = require('../../grpc-client/sustain_pb');
 
 export default {
   name: 'SviMap',
-  computed: mapGetters(['currentBounds', 'currentZoomLevel']),
+  computed: mapGetters(['currentBounds', 'currentZoomLevel', 'sviWeights']),
   components: {
     'l-polygon': LPolygon,
     'l-tool-tip': LTooltip,
@@ -38,8 +38,23 @@ export default {
       const geoJson = grpcQuerier.makeGeoJson(bounds._southWest, bounds._northEast);
       this.updateMapData(geoJson);
     },
+    sviWeights: function () {
+      this.recalculateSvi();
+    }
   },
   methods: {
+    recalculateSvi() {
+      console.log('recalculating SVI');
+      let sviDataCopy = [...this.sviData];
+      let i = 1;
+      sviDataCopy.forEach(svi => {
+        let newRplThemes = i++/1000;
+
+
+        svi.RPL_THEMES = newRplThemes;
+      })
+      this.sviData = this.updateColors(sviDataCopy);
+    },
     updateMapData(geoJson) {
       console.log('querying sviData');
       let sviData = [];
@@ -55,14 +70,17 @@ export default {
       call.on('error', console.error);
       call.on('end', () => {
         console.log('sviData count:', sviData.length);
-        let [min, max] = this.getMinAndMax(sviData, 'RPL_THEMES');
-        sviData.forEach(datum => {
-          const normalizedValue = this.normalize(datum.RPL_THEMES, min, max);
-          datum.color = this.getColorForPercentage(normalizedValue, 0.5);
-          datum.normalizedValue = normalizedValue;
-        })
-        this.sviData = sviData;
+        this.sviData = this.updateColors(sviData);
       });
+    },
+    updateColors(sviData) {
+      let [min, max] = this.getMinAndMax(sviData, 'RPL_THEMES');
+      sviData.forEach(datum => {
+        const normalizedValue = this.normalize(datum.RPL_THEMES, min, max);
+        datum.color = this.getColorForPercentage(normalizedValue, 0.5);
+        datum.normalizedValue = normalizedValue;
+      })
+      return sviData;
     },
     reverseLatLngPolygon: function (poly) {
       const out = [];

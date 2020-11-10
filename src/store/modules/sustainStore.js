@@ -7,7 +7,8 @@ const state = {
     mapData: {},    // data to visualize
     activeDatasets: [], // datasets active on the map
     currentBounds: [],   // bounding coordinates of visible area of the map
-    currentZoomLevel: 16
+    currentZoomLevel: 16,
+    sviWeights: {}
 };
 
 const getters = {
@@ -15,7 +16,8 @@ const getters = {
     activeDatasets: (state) => JSON.parse(JSON.stringify(state.activeDatasets)),
     mapData: (state) => state.mapData,
     currentBounds: (state) => state.currentBounds,
-    currentZoomLevel: (state) => state.currentZoomLevel
+    currentZoomLevel: (state) => state.currentZoomLevel,
+    sviWeights: (state) => state.sviWeights
 }
 
 const actions = {
@@ -36,6 +38,9 @@ const actions = {
     },
     setCurrentZoomLevel({commit}, zoomLevel) {
         commit('setCurrentZoomLevel', zoomLevel);
+    },
+    updateSviWeights({commit}, sviWeights) {
+        commit('updateSviWeights', sviWeights);
     }
 };
 
@@ -65,6 +70,9 @@ const mutations = {
     removeMapData(state, id) {
 
     },
+    updateSviWeights(state, sviWeights) {
+        state.sviWeights = sviWeights;
+    }
 };
 
 export default {
