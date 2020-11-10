@@ -4,11 +4,20 @@
       <div class="row form-control-static">
         <label for="censusResolution" class="">Resolution </label>
         <select class="form-control" id="censusResolution">
-          <option value="county">County</option>
+          <!--          <option value="county">County</option>-->
           <option value="tract">Tract</option>
         </select>
       </div>
       <br/>
+      <!-- Below Poverty -->
+      <div class="row form-control-static">
+        <div class="col-8">
+          <label><h5><b>Variable</b></h5></label>
+        </div>
+        <div class="col-4">
+          <label><h5><b>Weight</b></h5></label>
+        </div>
+      </div>
       <!-- Below Poverty -->
       <div class="row form-control-static">
         <div class="col-8">

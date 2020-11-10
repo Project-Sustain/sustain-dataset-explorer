@@ -46,7 +46,6 @@ export default {
     recalculateSvi() {
       console.log('recalculating SVI');
       let sviDataCopy = [...this.sviData];
-      let i = 1;
       sviDataCopy.forEach(svi => {
         let newRplThemes = 0;
         let denominator = 0;
@@ -77,6 +76,7 @@ export default {
       call.on('end', () => {
         console.log('sviData count:', sviData.length);
         this.sviData = this.updateColors(sviData);
+        this.recalculateSvi();
       });
     },
     updateColors(sviData) {
