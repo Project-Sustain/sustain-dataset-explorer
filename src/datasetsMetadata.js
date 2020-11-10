@@ -1,5 +1,12 @@
 const datasets = [
     {
+        'id': 'svi',
+        'value': "Social Vulnerability Index",
+        'propertiesElement': 'SviQueryConstructor',
+        properties: {},
+        'mapElement': 'SviMap'
+    },
+    {
         'id': 'hospitals',
         'value': "Hospitals",
         'propertiesElement': 'HospitalsQueryConstructor',
@@ -73,7 +80,7 @@ const datasets = [
         'value': "Open Street Maps",
         'propertiesElement': 'OSMQueryConstructor',
         'mapElement': 'OSMMap'
-    }
+    },
 ];
 
 
