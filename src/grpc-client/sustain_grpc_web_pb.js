@@ -298,6 +298,81 @@ proto.sustain.SustainPromiseClient.prototype.datasetQuery =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.sustain.SviRequest,
+ *   !proto.sustain.SviResponse>}
+ */
+const methodDescriptor_Sustain_SviQuery = new grpc.web.MethodDescriptor(
+  '/sustain.Sustain/SviQuery',
+  grpc.web.MethodType.SERVER_STREAMING,
+  proto.sustain.SviRequest,
+  proto.sustain.SviResponse,
+  /**
+   * @param {!proto.sustain.SviRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.sustain.SviResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.sustain.SviRequest,
+ *   !proto.sustain.SviResponse>}
+ */
+const methodInfo_Sustain_SviQuery = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.sustain.SviResponse,
+  /**
+   * @param {!proto.sustain.SviRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.sustain.SviResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.sustain.SviRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.sustain.SviResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.sustain.SustainClient.prototype.sviQuery =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/sustain.Sustain/SviQuery',
+      request,
+      metadata || {},
+      methodDescriptor_Sustain_SviQuery);
+};
+
+
+/**
+ * @param {!proto.sustain.SviRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.sustain.SviResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.sustain.SustainPromiseClient.prototype.sviQuery =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/sustain.Sustain/SviQuery',
+      request,
+      metadata || {},
+      methodDescriptor_Sustain_SviQuery);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.sustain.TargetedCensusRequest,
  *   !proto.sustain.TargetedCensusResponse>}
  */
@@ -367,6 +442,81 @@ proto.sustain.SustainPromiseClient.prototype.executeTargetedCensusQuery =
       request,
       metadata || {},
       methodDescriptor_Sustain_ExecuteTargetedCensusQuery);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.sustain.CompoundRequest,
+ *   !proto.sustain.CompoundResponse>}
+ */
+const methodDescriptor_Sustain_CompoundQuery = new grpc.web.MethodDescriptor(
+  '/sustain.Sustain/CompoundQuery',
+  grpc.web.MethodType.SERVER_STREAMING,
+  proto.sustain.CompoundRequest,
+  proto.sustain.CompoundResponse,
+  /**
+   * @param {!proto.sustain.CompoundRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.sustain.CompoundResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.sustain.CompoundRequest,
+ *   !proto.sustain.CompoundResponse>}
+ */
+const methodInfo_Sustain_CompoundQuery = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.sustain.CompoundResponse,
+  /**
+   * @param {!proto.sustain.CompoundRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.sustain.CompoundResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.sustain.CompoundRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.sustain.CompoundResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.sustain.SustainClient.prototype.compoundQuery =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/sustain.Sustain/CompoundQuery',
+      request,
+      metadata || {},
+      methodDescriptor_Sustain_CompoundQuery);
+};
+
+
+/**
+ * @param {!proto.sustain.CompoundRequest} request The request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!grpc.web.ClientReadableStream<!proto.sustain.CompoundResponse>}
+ *     The XHR Node Readable Stream
+ */
+proto.sustain.SustainPromiseClient.prototype.compoundQuery =
+    function(request, metadata) {
+  return this.client_.serverStreaming(this.hostname_ +
+      '/sustain.Sustain/CompoundQuery',
+      request,
+      metadata || {},
+      methodDescriptor_Sustain_CompoundQuery);
 };
 
 

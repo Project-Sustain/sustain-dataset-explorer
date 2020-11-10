@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="censusData">
     <l-polygon v-for="datum in censusData"
                :lat-lngs="reverseLatLngPolygon(datum.geometry.coordinates)"
                :key="datum.properties.GISJOIN"
@@ -7,6 +7,21 @@
     >
       <l-tool-tip>{{ datum.values.toLocaleString() }}</l-tool-tip>
     </l-polygon>
+    <l-marker
+        v-for="center in centers"
+        :lat-lng="[center.y, center.x]"
+        :key="center.GISJOIN"
+        :icon="dot"
+    ></l-marker>
+
+    <l-circle
+        v-for="center in centers"
+        :lat-lng="[center.y, center.x]"
+        :key="'circle-' + center.GISJOIN"
+        :radius="600"
+        metric="true"
+        color="red"
+    ></l-circle>
   </div>
 </template>
 
@@ -14,8 +29,11 @@
 /* eslint-disable vue/no-unused-components,no-unused-vars */
 
 import {mapGetters} from 'vuex';
-import {LGeoJson, LPolygon, LTooltip} from 'vue2-leaflet';
+import {LCircle, LMarker, LGeoJson, LPolygon, LTooltip} from 'vue2-leaflet';
 import grpcQuerier from "@/grpc-client/grpc-querier";
+import centers from '../../resources/tract_centers_1000.json';
+import {Icon} from 'leaflet';
+import dotIcon from '../../resources/dot.svg';
 
 const {client} = require('../../grpc-client/grpc-querier');
 const {CensusRequest} = require('../../grpc-client/sustain_pb');
@@ -26,13 +44,23 @@ export default {
   components: {
     'l-polygon': LPolygon,
     'l-geo-json': LGeoJson,
-    'l-tool-tip': LTooltip
+    'l-tool-tip': LTooltip,
+    'l-marker': LMarker,
+    'l-circle': LCircle
   },
   data() {
     return {
       censusData: null,
       featureName: '',
+      centers: centers,
+      dot: new Icon({
+        iconUrl: dotIcon,
+        iconSize: [50, 50]
+      })
     };
+  },
+  mounted() {
+    // centers.forEach(console.log);
   },
   watch: {
     currentBounds: function () {
@@ -41,7 +69,7 @@ export default {
       this.updateMapData(geoJson);
     },
     currentZoomLevel: function () {
-      console.log(this.currentZoomLevel);
+      console.log('zoomLevel:', this.currentZoomLevel);
     }
   },
   methods: {
@@ -52,13 +80,12 @@ export default {
 
       // set census resolution according to currentZoomLevel
       if (this.currentZoomLevel >= 14) {
-        censusRequest.setCensusresolution(3);  // block
+        censusRequest.setCensusresolution(2);  // block
       } else if (this.currentZoomLevel >= 10) {
         censusRequest.setCensusresolution(2);  // tract
       } else {
         censusRequest.setCensusresolution(1);  // county
       }
-
 
       censusRequest.setCensusfeature(0); // total population
       censusRequest.setRequestgeojson(geoJson);
@@ -68,6 +95,7 @@ export default {
         let response = JSON.parse(data.array[1]);
         response.values = JSON.parse(data.array[0])["2010_total_population"];
         censusData.push(response);
+        // this.censusData.push(response);
       });
       call.on('end', () => {
         console.log('census entries count:', censusData.length);

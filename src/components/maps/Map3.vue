@@ -12,12 +12,13 @@
       >
         <l-tile-layer :url="url">
         </l-tile-layer>
-        <!-- <HospitalsMap/>-->
-        <CensusMap/>
+<!--         <HospitalsMap/>-->
+<!--        <CensusMap/>-->
         <!--        <DamsMap/>-->
         <!--        <NaturalGasPipelinesMap/>-->
         <!--        <TransmissionLinesMap/>-->
         <!--        <PowerPlantsMap/>-->
+        <SviMap/>
       </l-map>
     </div>
   </div>
@@ -34,6 +35,7 @@ import DamsMap from "@/components/maps/DamsMap";
 import NaturalGasPipelinesMap from "@/components/maps/NaturalGasPipelinesMap";
 import TransmissionLinesMap from "@/components/maps/TransmissionLinesMap";
 import PowerPlantsMap from "@/components/maps/PowerPlantsMap";
+import SviMap from "@/components/maps/SviMap";
 
 export default {
   name: 'Map3',
@@ -46,7 +48,7 @@ export default {
       bounds: null
     };
   },
-  components: {PowerPlantsMap, TransmissionLinesMap, NaturalGasPipelinesMap, DamsMap, CensusMap, HospitalsMap},
+  components: {SviMap, PowerPlantsMap, TransmissionLinesMap, NaturalGasPipelinesMap, DamsMap, CensusMap, HospitalsMap},
   methods: {
     ...mapActions(['setCurrentBounds', 'setCurrentZoomLevel']),
     zoomUpdated(zoom) {

@@ -46,6 +46,7 @@ import TransmissionLinesQueryConstructor from "@/components/queryConstructors/Tr
 import FloodZonesQueryConstructor from "@/components/queryConstructors/FloodZonesQueryConstructor";
 import ElectricalSubstationsQueryConstructor
   from "@/components/queryConstructors/ElectricalSubstationsQueryConstructor";
+import SviQueryConstructor from "@/components/queryConstructors/SviQueryConstructor";
 
 export default {
   name: "QueryConstructor",
@@ -59,7 +60,8 @@ export default {
     PowerPlantsQueryConstructor,
     TransmissionLinesQueryConstructor,
     FloodZonesQueryConstructor,
-    ElectricalSubstationsQueryConstructor
+    ElectricalSubstationsQueryConstructor,
+    SviQueryConstructor
   },
   computed: {
     ...mapGetters(['allDatasets', 'activeDatasets']),

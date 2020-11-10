@@ -1,0 +1,13 @@
+{
+  "fields": [
+    {
+      "type": "select",
+      "label": "Census Resolution",
+      "model": "censusResolution",
+      "values": [
+        "County",
+        "Tract"
+      ]
+    }
+  ]
+}
