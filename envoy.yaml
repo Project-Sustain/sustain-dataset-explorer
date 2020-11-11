@@ -29,7 +29,7 @@ static_resources:
                           route: { cluster: gRPCServiceForDatasetExplorer }
                         - match: { prefix: "/census" }
                           route: { cluster: TargetedQueryServiceCensus }
-                        - match: { prefix: "/Sustain" }
+                        - match: { prefix: "/dev/sustain.Sustain" }
                           route: { cluster: sustainDevService}
                         - match: { prefix: "/" }
                           route: { cluster: TargetedQueryService }
@@ -66,16 +66,16 @@ static_resources:
       type: logical_dns
       http2_protocol_options: {}
       lb_policy: round_robin
-      hosts: [{ socket_address: { address: "lattice-1.cs.colostate.edu", port_value: 50051 }}]
+      hosts: [{ socket_address: { address: "lattice-0.cs.colostate.edu", port_value: 50051 }}]
     - name: gRPCServiceForMap2
       connect_timeout: 0.25s
       type: logical_dns
       http2_protocol_options: {}
       lb_policy: round_robin
-      hosts: [{ socket_address: { address: "lattice-1.cs.colostate.edu", port_value: 50051 }}]
+      hosts: [{ socket_address: { address: "lattice-0.cs.colostate.edu", port_value: 50051 }}]
     - name: sustainDevService
       connect_timeout: 0.25s
       type: logical_dns
       http2_protocol_options: {}
       lb_policy: round_robin
-      hosts: [{ socket_address: { address: "lattice-46.cs.colostate.edu", port_value: 50055 }}]
+      hosts: [{ socket_address: { address: "lattice-47.cs.colostate.edu", port_value: 50055 }}]
