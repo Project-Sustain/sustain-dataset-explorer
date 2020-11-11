@@ -21,6 +21,8 @@ static_resources:
                     - name: local_service
                       domains: ["*"]
                       routes:
+                        - match: { prefix: "/sustain_reciever" }
+                          route: { cluster: sustain_webhook_listener }
                         - match: { prefix: "/sustain.Sustain" }
                           route: { cluster: gRPCServiceForMap2,
                                    timeout: 0s,
@@ -79,3 +81,9 @@ static_resources:
       http2_protocol_options: {}
       lb_policy: round_robin
       hosts: [{ socket_address: { address: "lattice-47.cs.colostate.edu", port_value: 50055 }}]
+    - name: sustain_webhook_listener
+      connect_timeout: 0.25s
+      type: logical_dns
+      http2_protocol_options: {}
+      lb_policy: round_robin
+      hosts: [{ socket_address: { address: "lattice-2.cs.colostate.edu", port_value: 50055 }}]
